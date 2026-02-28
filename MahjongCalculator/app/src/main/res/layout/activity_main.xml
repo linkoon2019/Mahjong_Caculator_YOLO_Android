@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- 1. Main Interface (Results & Inputs) -->
+    <LinearLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Top: Image & Detection Overlay -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" 
+            android:background="#222">
+
+            <ImageView
+                android:id="@+id/resultImageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <com.example.mahjongcalculator.OverlayView
+                android:id="@+id/detectionOverlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="@id/resultImageView"
+                app:layout_constraintBottom_toBottomOf="@id/resultImageView"
+                app:layout_constraintStart_toStartOf="@id/resultImageView"
+                app:layout_constraintEnd_toEndOf="@id/resultImageView" />
+            
+             <TextView
+                android:id="@+id/placeholderText"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp" 
+                android:gravity="center"
+                android:text="暂无拍摄图片"
+                android:textColor="#FFF"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Bottom: Inputs -->
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnLaunchCamera"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="拍摄手牌"
+                    android:textSize="18sp" />
+
+                <!-- Middle: Detected Tiles (Visual) -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#EEE"
+                    android:padding="8dp"
+                    android:layout_marginTop="8dp">
+            
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- Hand Tiles (Left) -->
+                        <LinearLayout
+                            android:id="@+id/tilesContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingEnd="16dp"> 
+                            <!-- Padding to separate from melds -->
+                        </LinearLayout>
+
+                        <!-- Melded Tiles (Right, e.g. Chi/Pon/Kan) -->
+                        <LinearLayout
+                            android:id="@+id/meldsContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="对局场况"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"/>
+
+                <!-- 1. Winds Selection (Prevalent & Seat) -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp">
+
+                    <!-- Prevalent Wind Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="场风："
+                            android:layout_marginEnd="8dp"/>
+                        
+                        <ImageView
+                            android:id="@+id/imgPrevalentEast"
+                            android:layout_width="30dp"
+                            android:layout_height="38dp"
+                            android:src="@drawable/tile_1z"
+                            android:background="#FFD700" 
+                            android:padding="2dp"
+                            android:layout_marginEnd="8dp"/>
+                        <ImageView
+                            android:id="@+id/imgPrevalentSouth"
+                            android:layout_width="30dp"
+                            android:layout_height="38dp"
+                            android:src="@drawable/tile_2z"
+                            android:padding="2dp"/>
+                    </LinearLayout>
+
+                    <!-- Seat Wind Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="自风："
+                            android:layout_marginEnd="8dp"/>
+
+                        <ImageView
+                            android:id="@+id/imgSeatEast"
+                            android:layout_width="30dp"
+                            android:layout_height="38dp"
+                            android:src="@drawable/tile_1z"
+                            android:background="#FFD700"
+                            android:padding="2dp"
+                            android:layout_marginEnd="8dp"/>
+                        <ImageView
+                            android:id="@+id/imgSeatSouth"
+                            android:layout_width="30dp"
+                            android:layout_height="38dp"
+                            android:src="@drawable/tile_2z"
+                            android:padding="2dp"
+                            android:layout_marginEnd="8dp"/>
+                        <ImageView
+                            android:id="@+id/imgSeatWest"
+                            android:layout_width="30dp"
+                            android:layout_height="38dp"
+                            android:src="@drawable/tile_3z"
+                            android:padding="2dp"
+                            android:layout_marginEnd="8dp"/>
+                        <ImageView
+                            android:id="@+id/imgSeatNorth"
+                            android:layout_width="30dp"
+                            android:layout_height="38dp"
+                            android:src="@drawable/tile_4z"
+                            android:padding="2dp"/>
+                    </LinearLayout>
+                    
+                    <!-- Honba Row -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="8dp">
+                        
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="本场："
+                            android:layout_marginEnd="8dp"/>
+                            
+                        <Spinner
+                            android:id="@+id/spinnerHonba"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:entries="@array/honba_options"
+                            android:minWidth="100dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 2. Basic Conditions -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp">
+
+                    <CheckBox
+                        android:id="@+id/chkRiichi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="立直" 
+                        android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/chkTsumo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="自摸" 
+                        android:layout_weight="1"/>
+                        
+                    <CheckBox
+                        android:id="@+id/chkIppatsu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="一发" 
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <!-- 3. Complex Conditions Button -->
+                <Button
+                    android:id="@+id/btnComplexConditions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="特殊役种"
+                    android:backgroundTint="#555"
+                    android:layout_marginTop="8dp"/>
+                <TextView
+                    android:id="@+id/txtAdvancedSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="未选择"
+                    android:textSize="12sp"
+                    android:textColor="#888"
+                    android:gravity="center"/>
+
+
+                <!-- Dora Indicators Row -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="宝牌指示牌："
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"/>
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#EEE"
+                    android:padding="4dp">
+                    <LinearLayout
+                        android:id="@+id/doraIndicatorContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+
+                <!-- Ura Dora Indicators Row -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="里宝牌指示牌："
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#EEE"
+                    android:padding="4dp">
+                    <LinearLayout
+                        android:id="@+id/uraDoraIndicatorContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+
+                <!-- Winning Tile Selection Row -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="选择胡牌："
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#EEE"
+                    android:padding="4dp">
+                    <LinearLayout
+                        android:id="@+id/winningSelectionContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+                <TextView
+                    android:id="@+id/txtSelectedWinning"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前选择：无"
+                    android:textSize="12sp"/>
+
+                <Button
+                    android:id="@+id/btnCalculate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="开始计算" />
+
+                <!-- Result Area: Using a LinearLayout to stack custom rows programmatically -->
+                <LinearLayout
+                    android:id="@+id/resultContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="16dp"
+                    android:padding="8dp"
+                    android:background="#FAFAFA">
+                    
+                    <TextView
+                        android:id="@+id/txtResult"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="计算结果将显示在这里"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- 2. Camera Interface -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cameraContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="#000">
+
+        <!-- The Viewfinder Strip (Narrower: 120dp) -->
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Capture Button (Center Bottom) -->
+        <Button
+            android:id="@+id/btnCapture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:text="拍摄"
+            android:backgroundTint="#F44336"
+            android:layout_marginBottom="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- Gallery Import Button (Right of Capture) -->
+        <Button
+            android:id="@+id/btnGallery"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:text="相册"
+            android:textSize="12sp"
+            android:backgroundTint="#2196F3"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="@id/btnCapture"
+            app:layout_constraintTop_toTopOf="@id/btnCapture"
+            app:layout_constraintStart_toEndOf="@id/btnCapture"/>
+
+        <!-- Cancel Button (Top Left) -->
+        <Button
+            android:id="@+id/btnCancelCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消"
+            android:backgroundTint="#777"
+            android:layout_margin="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

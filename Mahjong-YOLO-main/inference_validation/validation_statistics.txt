@@ -1,0 +1,57 @@
+Inference Validation Statistics
+========================================
+
+Model: trained_models_v2/yolo11m_best.pt
+Confidence threshold: 0.3
+IoU threshold: 0.5
+Images processed: 8
+
+Overall Metrics:
+Total GT objects: 202
+Total predictions: 207
+Correct detections: 168
+Class accuracy: 161/168 = 0.958
+Recall: 0.832
+Precision: 0.812
+
+False Positives: 39
+False Negatives: 34
+
+Per-class statistics:
+2s: TP=6, FP=2, FN=1, P=0.750, R=0.857
+5s: TP=7, FP=2, FN=0, P=0.778, R=1.000
+8s: TP=7, FP=1, FN=1, P=0.875, R=0.875
+2m: TP=4, FP=0, FN=1, P=1.000, R=0.800
+6m: TP=4, FP=1, FN=1, P=0.800, R=0.800
+1p: TP=7, FP=2, FN=0, P=0.778, R=1.000
+4p: TP=6, FP=0, FN=1, P=1.000, R=0.857
+9p: TP=5, FP=0, FN=1, P=1.000, R=0.833
+9m: TP=7, FP=1, FN=2, P=0.875, R=0.778
+1m: TP=6, FP=2, FN=3, P=0.750, R=0.667
+5z: TP=5, FP=0, FN=3, P=1.000, R=0.625
+2z: TP=7, FP=4, FN=0, P=0.636, R=1.000
+7z: TP=4, FP=5, FN=0, P=0.444, R=1.000
+2p: TP=5, FP=0, FN=3, P=1.000, R=0.625
+5p: TP=2, FP=0, FN=2, P=1.000, R=0.500
+6p: TP=4, FP=0, FN=1, P=1.000, R=0.800
+7s: TP=5, FP=0, FN=0, P=1.000, R=1.000
+9s: TP=2, FP=2, FN=2, P=0.500, R=0.500
+4s: TP=2, FP=2, FN=0, P=0.500, R=1.000
+3s: TP=6, FP=4, FN=0, P=0.600, R=1.000
+0s: TP=1, FP=0, FN=0, P=1.000, R=1.000
+3p: TP=2, FP=2, FN=1, P=0.500, R=0.667
+0p: TP=2, FP=0, FN=1, P=1.000, R=0.667
+8m: TP=4, FP=0, FN=3, P=1.000, R=0.571
+5m: TP=5, FP=1, FN=1, P=0.833, R=0.833
+4m: TP=8, FP=0, FN=1, P=1.000, R=0.889
+3m: TP=5, FP=0, FN=2, P=1.000, R=0.714
+8p: TP=5, FP=4, FN=1, P=0.556, R=0.833
+4z: TP=6, FP=4, FN=1, P=0.600, R=0.857
+1s: TP=1, FP=1, FN=3, P=0.500, R=0.250
+6s: TP=2, FP=0, FN=0, P=1.000, R=1.000
+6z: TP=5, FP=1, FN=2, P=0.833, R=0.714
+1z: TP=7, FP=2, FN=0, P=0.778, R=1.000
+7m: TP=2, FP=0, FN=0, P=1.000, R=1.000
+7p: TP=2, FP=0, FN=1, P=1.000, R=0.667
+3z: TP=2, FP=3, FN=1, P=0.400, R=0.667
+0m: TP=1, FP=0, FN=1, P=1.000, R=0.500

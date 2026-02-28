@@ -1,0 +1,29 @@
+YOLOv11 Mahjong Detection - Inference Summary
+==================================================
+
+Models tested: ['YOLOv11n', 'YOLOv11s', 'YOLOv11m']
+Test images: 3
+
+Detection counts per image:
+------------------------------
+
+Image: 58eec28b-000021.png
+  YOLOv11n: 15 detections
+  YOLOv11s: 19 detections
+  YOLOv11m: 23 detections
+
+Image: 7f225ccc-000014.png
+  YOLOv11n: 30 detections
+  YOLOv11s: 24 detections
+  YOLOv11m: 32 detections
+
+Image: dc359800-000022.png
+  YOLOv11n: 22 detections
+  YOLOv11s: 30 detections
+  YOLOv11m: 29 detections
+
+Average detections per model:
+------------------------------
+  YOLOv11n: 22.3
+  YOLOv11s: 24.3
+  YOLOv11m: 28.0

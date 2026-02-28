@@ -1,0 +1,45 @@
+
+# Android Studio
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Android App
+/MahjongCalculator/build/
+/MahjongCalculator/app/build/
+/MahjongCalculator/.gradle/
+
+# Python / Jupyter / Data
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+/venv/
+/env/
+.env
+
+# Large Files & Datasets (Important for GitHub)
+/archive/
+/Mahjong-YOLO-main/models/
+/Mahjong-YOLO-main/trained_models_v2/
+*.pt
+*.onnx
+*.tflite
+*.apk
+*.h5
+*.weights
+
+# Project specific
+/Project2025_12_18/

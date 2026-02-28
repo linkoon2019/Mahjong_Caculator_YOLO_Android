@@ -1,0 +1,7 @@
+names:
+- class_0
+nc: 1
+path: C:\Users\tfgmo\Documents\GitHub\Mahjong-Recognition\notebooks\data\processed
+test: test/images
+train: train/images
+val: val/images

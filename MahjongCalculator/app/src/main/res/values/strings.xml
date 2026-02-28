@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Mahjong Calculator</string>
+    <string-array name="winds">
+        <item>East (Ton)</item>
+        <item>South (Nan)</item>
+        <item>West (Sha)</item>
+        <item>North (Pei)</item>
+    </string-array>
+    <string-array name="honba_options">
+        <item>0 本场</item>
+        <item>1 本场</item>
+        <item>2 本场</item>
+        <item>3 本场</item>
+        <item>4 本场</item>
+        <item>5 本场</item>
+        <item>6 本场</item>
+        <item>7 本场</item>
+        <item>8 本场</item>
+    </string-array>
+</resources>

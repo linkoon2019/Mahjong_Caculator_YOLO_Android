@@ -1,0 +1,4 @@
+model,precision,recall,mAP50,mAP50_95,model_size_mb
+yolo11n_best,0.9426,0.7483,0.8796,0.6759,5.2
+yolo11s_best,0.9287,0.7653,0.8805,0.6951,18.3
+yolo11m_best,0.8219,0.7724,0.8654,0.6517,38.7
